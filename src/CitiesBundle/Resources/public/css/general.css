@@ -1,0 +1,10 @@
+.datafrance {
+    height: 700px;
+}
+.datafrance iframe {
+    height: 100%;
+    width: 100%;
+}
+form#filtre-liste-ville {
+    margin:20px 0 20px 0;
+}

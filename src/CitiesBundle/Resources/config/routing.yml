@@ -1,0 +1,53 @@
+#accueil
+cities_home:
+    path:    /
+    defaults: { _controller: CitiesBundle:Home:index }
+#phpinfo
+phpinfo:
+    path:     /phpinfo
+    defaults: { _controller: CitiesBundle:Debug:phpinfo }
+
+#404
+route_404:
+    path:    /404.html
+    defaults: { _controller: CitiesBundle:Debug:route404 }
+
+# Parti villes
+cities_villes:
+    path:    /liste-communes/{page}/{limit}
+    defaults: { _controller: CitiesBundle:Ville:liste, page:1, limit:100 }
+cities_search:
+    path:    /recherche-communes/{terms}
+    defaults: { _controller: CitiesBundle:Ville:search }
+    requirements:
+        _method: GET
+        terms: "[a-zA-Z0-9]*"
+cities_city:
+    path:    /{region_slug}/{departement_slug}/{city_slug}
+    defaults: { _controller: CitiesBundle:Ville:view }
+    requirements:
+        region_slug: "[a-z-]*[a-z]*$"
+        departement_slug: "[a-z-]*[a-z]*$"
+        city_slug: "[a-z-]*[a-z]*$"
+cities_avis:
+    path:    /commune-avis
+    defaults: { _controller: CitiesBundle:City:postAvis }
+#liste des regions => affichage des villes et liste des departements => affichage des villes
+cities_regions:
+    path:    /regions
+    defaults: { _controller: CitiesBundle:Region:liste }
+cities_departements:
+    path:    /departements
+    defaults: { _controller: CitiesBundle:Departement:liste }
+cities_region:
+    path:    /{region_slug}
+    defaults: { _controller: CitiesBundle:Region:view }
+    requirements:
+        region_slug: "[a-z-]*[a-z]*$"
+cities_departement:
+    path:    /{region_slug}/{departement_slug}
+    defaults: { _controller: CitiesBundle:Departement:view }
+    requirements:
+        region_slug: "[a-z-]*[a-z]*$"
+        departement_slug: "[a-z-]*[a-z]*$"
+

@@ -1,0 +1,24 @@
+{% extends "CitiesBundle::layout.html.twig" %}
+
+{% block header_menu %}
+    <h1>Welcome to the Home:index page</h1>
+{% endblock %}
+
+{% block main_content %}
+    <div class="col-sm-12">
+        <div id="gmaps" class="google-maps">
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {% javascripts
+    '@CitiesBundle/Resources/public/js/home_maps.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock javascripts %}
+{% block vars_js %}
+    var json_villes = '{{ (villes|json_encode|raw) }}';
+{% endblock vars_js %}

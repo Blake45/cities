@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>
+        {% block title %}
+            {{ title }}
+        {% endblock %}
+    </title>
+    {% stylesheets
+    'bundles/cities/css/bootstrap.min.css'
+    'bundles/cities/css/simple-sidebar.css'
+    'bundles/cities/css/general.css'
+    filter='cssrewrite'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    {% block stylesheets_custom %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            {% block left_menu %}
+                {% include "CitiesBundle:Partial:left_menu.html.twig" %}
+            {% endblock left_menu %}
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                {% block header %}
+                    {% include "CitiesBundle:Partial:header.html.twig" %}
+                {% endblock header %}
+                {% block main_content %}{% endblock main_content %}
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+
+    <script type="text/javascript">
+        {% block vars_js %}{% endblock vars_js %}
+    </script>
+    {% javascripts
+    '@CitiesBundle/Resources/public/js/jquery-3.1.0.min.js'
+    '@CitiesBundle/Resources/public/js/jquery-ui.min.js'
+    '@CitiesBundle/Resources/public/js/bootstrap.min.js'
+    '@CitiesBundle/Resources/public/js/sidenav.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% block javascripts %}{% endblock javascripts %}
+</body>
+</html>

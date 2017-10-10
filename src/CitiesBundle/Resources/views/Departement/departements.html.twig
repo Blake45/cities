@@ -1,0 +1,19 @@
+{% extends "CitiesBundle::layout.html.twig" %}
+
+{% block main_content %}
+    <div class="col-sm-12">
+        <h1>Liste des departements</h1>
+    </div>
+    <ul class="list-group col-sm-6">
+    {% for departement in departements %}
+        <li class="list-group-item">
+            <a href="{{ url("cities_departement",{region_slug: departement.region.slug, departement_slug: departement.slug}) }}">
+                {{ departement.name }}
+            </a>
+        </li>
+        {% if loop.index is divisible by(10) %}
+            </ul><ul class="list-group col-sm-6">
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endblock %}

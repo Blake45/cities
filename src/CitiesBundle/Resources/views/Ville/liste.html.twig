@@ -1,0 +1,51 @@
+{% extends "CitiesBundle::layout.html.twig" %}
+
+{% block main_content %}
+    <div class="col-sm-12">
+        <h1>Liste des villes</h1>
+    </div>
+    <div class="col-sm-5">
+        <form id="filtre-liste-ville" action="" method="get" class="form-inline">
+            <select id="region" name="region" class="form-control">
+                <option value="">Selectionner une region</option>
+                {% for region in regions %}
+                    <option {% if regionSelected and regionSelected.name == region.name %}selected{% endif %} value="{{ region.name }}">{{ region.name }}</option>
+                {% endfor %}
+            </select>
+            <select id="departement" name="departement" class="form-control">
+                <option value="">Selectionner un departement</option>
+                {% for departement in departements %}
+                    <option {% if departementSelected and departementSelected.name == departement.name %}selected{% endif %} value="{{ departement.name }}">{{ departement.name }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+    <div class="col-sm-7 text-right">
+        {% include "CitiesBundle:Partial:pagination.html.twig" with {'pagination' : pagination} %}
+    </div>
+    <ul class="list-group col-sm-6">
+    {% for ville in villes %}
+        {% set regionSlug = ville.region ? ville.region.slug : '' %}
+        {% set departementSlug = ville.departement ? ville.departement.slug : '' %}
+        <li class="list-group-item">
+            <a href="{{ url("cities_city",{region_slug: regionSlug, departement_slug: departementSlug, city_slug: ville.slug}) }}">
+                {{ ville.name }}
+            </a>
+        </li>
+        {% if loop.index is divisible by(10) %}
+            </ul><ul class="list-group col-sm-6">
+        {% endif %}
+    {% endfor %}
+    </ul>
+    <div class="col-sm-12 text-center">
+        {% include "CitiesBundle:Partial:pagination.html.twig" with {'pagination' : pagination} %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {% javascripts
+    '@CitiesBundle/Resources/public/js/search.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock javascripts %}

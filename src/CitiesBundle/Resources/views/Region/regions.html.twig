@@ -1,0 +1,19 @@
+{% extends "CitiesBundle::layout.html.twig" %}
+
+{% block main_content %}
+    <div class="col-sm-12">
+        <h1>Liste des regions</h1>
+    </div>
+    <ul class="list-group col-sm-6">
+        {% for region in regions %}
+            <li class="list-group-item">
+                <a href="{{ url("cities_region",{region_slug: region.slug}) }}">
+                    {{ region.name }}
+                </a>
+            </li>
+            {% if loop.index is divisible by(10) %}
+                </ul><ul class="list-group col-sm-6">
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}
