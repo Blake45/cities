@@ -64,7 +64,7 @@ class VilleRepository extends \Doctrine\ORM\EntityRepository
                 ->select('ville.name, ville.numberPopulation')
                 ->from($this->_entityName, 'ville')
                 ->where('ville.numberPopulation >= :population')
-                ->orderBy('ville.numberPopulation', 'DESC')
+                /*->orderBy('ville.numberPopulation', 'DESC')*/
                 ->setParameter('population', $population);
 
         return $query->getQuery()->getArrayResult();

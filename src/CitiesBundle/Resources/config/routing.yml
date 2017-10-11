@@ -15,7 +15,7 @@ route_404:
 # Parti villes
 cities_villes:
     path:    /liste-communes/{page}/{limit}
-    defaults: { _controller: CitiesBundle:Ville:liste, page:1, limit:100 }
+    defaults: { _controller: CitiesBundle:Ville:liste, page:0, limit:100 }
 cities_search:
     path:    /recherche-communes/{terms}
     defaults: { _controller: CitiesBundle:Ville:search }

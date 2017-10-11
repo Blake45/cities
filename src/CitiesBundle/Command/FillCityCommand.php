@@ -14,9 +14,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class FillCityCommand extends ContainerAwareCommand
 {
+    use APICommand;
 
     const URL_API = "https://geo.api.gouv.fr/";
-    const REPONSE_OK = 200;
 
     private $input;
     private $output;
@@ -72,30 +72,6 @@ class FillCityCommand extends ContainerAwareCommand
             $output->writeln('Page '.($this->page+1).' en cours de traitement');
             $this->restartCommand();
         }
-    }
-
-    /**
-     * generique function
-     * Return response from the API gouv GEO
-     * @param $type
-     * @param $urlApi
-     * @param $query
-     * @return array|mixed
-     */
-    private function callApi($type, $urlApi, $query=array()) {
-        $results = array();
-        $client = new Client();
-
-        try {
-            $guzzle = $client->request($type, $urlApi, $query);
-
-            if ($guzzle->getStatusCode() == self::REPONSE_OK) {
-                $results = json_decode($guzzle->getBody()->getContents());
-            }
-        } catch (ClientException $e) {
-            $this->output->writeln($e->getMessage());
-        }
-        return $results;
     }
 
     public function restartCommand()

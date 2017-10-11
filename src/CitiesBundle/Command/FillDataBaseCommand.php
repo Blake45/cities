@@ -17,6 +17,8 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 class FillDataBaseCommand extends ContainerAwareCommand
 {
 
+    use APICommand;
+
     const URL_API = "https://geo.api.gouv.fr/";
     const REPONSE_OK = 200;
 
@@ -106,25 +108,6 @@ class FillDataBaseCommand extends ContainerAwareCommand
             "GET",
             self::URL_API."regions/$code/departements"
         );
-    }
-
-    /**
-     * generique function
-     * Return response from the API gouv GEO
-     * @param $type
-     * @param $urlApi
-     * @param $query
-     * @return array|mixed
-     */
-    private function callApi($type, $urlApi, $query=array()) {
-        $results = array();
-        $client = new Client();
-        $guzzle = $client->request($type, $urlApi, $query);
-
-        if ($guzzle->getStatusCode() == self::REPONSE_OK) {
-            $results = json_decode($guzzle->getBody()->getContents());
-        }
-        return $results;
     }
 
 }

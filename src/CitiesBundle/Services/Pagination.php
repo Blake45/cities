@@ -18,13 +18,15 @@ class Pagination
     private $paramsRoute;
     private $query;
 
-    public function __construct($page, $nbPages, $route, $paramsRoute, $query)
+    public function build($page, $nbPages, $route, $paramsRoute, $query)
     {
         $this->page = $page;
         $this->nbPages = $nbPages;
         $this->route = $route;
         $this->paramsRoute = $paramsRoute;
         $this->query = $query;
+
+        return $this;
     }
 
     private function getQueryString($aQuery)
@@ -49,7 +51,7 @@ class Pagination
             'nbPages' => $this->nbPages,
             'route' => $this->route,
             'paramsRoute' => $this->paramsRoute,
-            'query' => $this->query
+            'query' => $this->getQueryString($this->query)
         );
     }
 }

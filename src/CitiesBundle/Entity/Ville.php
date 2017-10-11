@@ -64,6 +64,13 @@ class Ville
      */
     private $codePostaux;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="code_insee", type="bigint", nullable=true)
+     */
+    private $codeInsee;
+
 
     /**
      * @var Region
@@ -293,5 +300,29 @@ class Ville
     {
         $codePostaux = json_decode($this->getCodePostaux());
         return array_shift($codePostaux);
+    }
+
+    /**
+     * Set codeInsee
+     *
+     * @param integer $codeInsee
+     *
+     * @return Ville
+     */
+    public function setCodeInsee($codeInsee)
+    {
+        $this->codeInsee = $codeInsee;
+
+        return $this;
+    }
+
+    /**
+     * Get codeInsee
+     *
+     * @return integer
+     */
+    public function getCodeInsee()
+    {
+        return $this->codeInsee;
     }
 }

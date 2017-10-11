@@ -1,18 +1,26 @@
 {% extends "CitiesBundle::layout.html.twig" %}
 
-{% block header_menu %}
-    <h1>Welcome to the Home:index page</h1>
+{% block stylesheets_custom %}
+    {% stylesheets
+    'bundles/cities/css/gmaps.css'
+    filter='cssrewrite'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
 {% endblock %}
 
 {% block main_content %}
     <div class="col-sm-12">
-        <div id="gmaps" class="google-maps">
-
-        </div>
+        <h1>Home Cities Project WIP</h1>
+    </div>
+    <div class="col-sm-12">
+        <div id="gmaps" class="google-maps"></div>
     </div>
 {% endblock %}
 
 {% block javascripts %}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ API_KEY }}">
+    </script>
     {% javascripts
     '@CitiesBundle/Resources/public/js/home_maps.js'
     %}

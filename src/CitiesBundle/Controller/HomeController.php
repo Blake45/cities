@@ -12,7 +12,8 @@ class HomeController extends Controller
 
         return $this->render('CitiesBundle:Home:index.html.twig', array(
             'title' => 'Project Cities WIP',
-            'villes' => $villeRepo->getVillesImportantes()
+            'villes' => $villeRepo->getVillesImportantes(),
+            'API_KEY' => $this->get('cities.ville')->getGmapsAPI_KEY()
         ));
     }
 

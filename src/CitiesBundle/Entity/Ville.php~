@@ -64,11 +64,18 @@ class Ville
      */
     private $codePostaux;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="code_insee", type="bigint", nullable=true)
+     */
+    private $codeInsee;
+
 
     /**
      * @var Region
      *
-     * @ORM\ManyToOne(targetEntity="Region")
+     * @ORM\ManyToOne(targetEntity="Region", inversedBy="villes", fetch="EAGER")
      * @ORM\JoinColumn(name="region_id", referencedColumnName="id")
      */
     private $region;
@@ -77,7 +84,7 @@ class Ville
     /**
      * @var Departement
      *
-     * @ORM\ManyToOne(targetEntity="Departement")
+     * @ORM\ManyToOne(targetEntity="Departement", fetch="EAGER")
      * @ORM\JoinColumn(name="departement_id", referencedColumnName="id")
      */
     private $departement;
@@ -235,5 +242,63 @@ class Ville
     public function getCodePostaux()
     {
         return $this->codePostaux;
+    }
+
+    /**
+     * Set region
+     *
+     * @param \CitiesBundle\Entity\Region $region
+     *
+     * @return Ville
+     */
+    public function setRegion(\CitiesBundle\Entity\Region $region = null)
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * Get region
+     *
+     * @return \CitiesBundle\Entity\Region
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * Set departement
+     *
+     * @param \CitiesBundle\Entity\Departement $departement
+     *
+     * @return Ville
+     */
+    public function setDepartement(\CitiesBundle\Entity\Departement $departement = null)
+    {
+        $this->departement = $departement;
+
+        return $this;
+    }
+
+    /**
+     * Get departement
+     *
+     * @return \CitiesBundle\Entity\Departement
+     */
+    public function getDepartement()
+    {
+        return $this->departement;
+    }
+
+    /**
+     * Retourne le premier codePostal d'une ville
+     * @return mixed
+     */
+    public function getMainCodePostal()
+    {
+        $codePostaux = json_decode($this->getCodePostaux());
+        return array_shift($codePostaux);
     }
 }

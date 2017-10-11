@@ -28,41 +28,20 @@ class VilleController extends Controller
         $search = $this->getSearchCriteres($regionSelected, $departementSelected);
 
         $villes = $villeRepo->getVillePaginated(($page*$limit), $limit, $search);
-        $pagination = array(
-            'page' => $page,
-            'nbPages' => ceil($villeRepo->getCountVillePaginated()/$limit),
-            'nomRoute' => 'cities_villes',
-            'paramsRoute' => array(),
-            'querystring' => $this->getQueryString($request->query->all())
-        );
+        $pagination = $this->get('cities_pagination')->build($page, ceil($villeRepo->getCountVillePaginated()/$limit), 'cities_villes', array(), $request->query->all());
 
         return $this->render(
             "CitiesBundle:Ville:liste.html.twig",
             array(
                 'title' => "Listes de villes",
                 'villes' => $villes,
-                'pagination' => $pagination,
+                'pagination' => $pagination->getPagination(),
                 'regions' => $regionRepo->findAll(),
                 'departements' => $departementRepo->findAll(),
                 'regionSelected' => $regionSelected,
                 'departementSelected' => $departementSelected
             )
         );
-    }
-
-    private function getQueryString($aQuery)
-    {
-        $query = "";
-        foreach($aQuery as $param => $value) {
-            if ($value === reset($aQuery)) {
-                $query .= "?";
-            }
-            $query .= $param."=".$value;
-            if ($value !== end($aQuery)) {
-                $query .= "&";
-            }
-        }
-        return $query;
     }
 
     private function getSearchCriteres($regionSelected, $departementSelected)

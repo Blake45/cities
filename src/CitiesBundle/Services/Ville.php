@@ -9,6 +9,7 @@ use CitiesBundle\Entity\Ville as ObjectVille;
 
 class Ville
 {
+    const API_KEY = "AIzaSyDEi31WpUnyn-fjOpbVeqCkydSCEDmSJW0";
     private $em;
 
     public function __construct(EntityManagerInterface $em) {
@@ -33,9 +34,24 @@ class Ville
             }
             $ville->setRegion($departement->getRegion());
             $ville->setDepartement($departement);
+            $ville->setCodeInsee($data->code);
 
             $this->em->persist($ville);
             $this->em->flush();
         }
+    }
+
+    public function getGmapsAPI_KEY()
+    {
+        return self::API_KEY;
+    }
+
+    public function addGPSDataToCity(\CitiesBundle\Entity\Ville $ville, $lat, $lng)
+    {
+        $ville->setLatitude($lat);
+        $ville->setLongitude($lng);
+
+        $this->em->persist($ville);
+        $this->em->flush();
     }
 }
