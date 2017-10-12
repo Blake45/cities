@@ -7,12 +7,15 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
     cities.departement:
-            class: CitiesBundle\Services\Departement
-            arguments:
-                - "@doctrine.orm.entity_manager"
+        class: CitiesBundle\Services\Departement
+        arguments:
+            - "@doctrine.orm.entity_manager"
     cities.ville:
-            class: CitiesBundle\Services\Ville
-            arguments:
-                - "@doctrine.orm.entity_manager"
+        class: CitiesBundle\Services\Ville
+        arguments:
+            - "@doctrine.orm.entity_manager"
     cities_pagination:
-            class: CitiesBundle\Services\Pagination
+        class: CitiesBundle\Services\Pagination
+    cities.general.csv:
+        class: CitiesBundle\Services\Csv
+

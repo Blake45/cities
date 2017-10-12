@@ -46,12 +46,14 @@ class Ville
         return self::API_KEY;
     }
 
-    public function addGPSDataToCity(\CitiesBundle\Entity\Ville $ville, $lat, $lng)
+    public function addGPSDataToCity(\CitiesBundle\Entity\Ville $ville, $lat, $lng, $flush = true)
     {
         $ville->setLatitude($lat);
         $ville->setLongitude($lng);
 
         $this->em->persist($ville);
-        $this->em->flush();
+        if ($flush) {
+            $this->em->flush();
+        }
     }
 }

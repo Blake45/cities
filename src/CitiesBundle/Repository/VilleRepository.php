@@ -61,7 +61,7 @@ class VilleRepository extends \Doctrine\ORM\EntityRepository
     public function getVillesImportantes($population = 100000)
     {
         $query = $this->_em->createQueryBuilder()
-                ->select('ville.name, ville.numberPopulation')
+                ->select('ville.name, ville.numberPopulation, ville.codeInsee, ville.latitude, ville.longitude')
                 ->from($this->_entityName, 'ville')
                 ->where('ville.numberPopulation >= :population')
                 /*->orderBy('ville.numberPopulation', 'DESC')*/

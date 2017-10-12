@@ -10,6 +10,8 @@ namespace CitiesBundle\Command;
 
 
 use GuzzleHttp\Client;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 trait APICommand
 {
@@ -22,7 +24,7 @@ trait APICommand
      * @param $query
      * @return array|mixed
      */
-    private function callApi($type, $urlApi, $query=array()) {
+    protected function callApi($type, $urlApi, $query=array()) {
         $results = array();
         $client = new Client();
 
@@ -32,9 +34,27 @@ trait APICommand
             if ($guzzle->getStatusCode() == 200) {
                 $results = json_decode($guzzle->getBody()->getContents());
             }
-        } catch (ClientException $e) {
+        } catch (\Exception $e) {
+            $this->output->writeln($urlApi);
             $this->output->writeln($e->getMessage());
         }
         return $results;
+    }
+
+
+    protected function getDataCSVFile(InputInterface $input, OutputInterface $ouput, $filename, $serviceCSV)
+    {
+        $page = $input->hasArgument('page') ? $input->getArgument('page') : 0;
+        $limit = $input->hasArgument('package') ? $input->getArgument('package') : 100;
+        $delimiter = $input->hasArgument('delimiter') ? $input->getArgument('delimiter') : ';';
+
+        $data = $serviceCSV->convert(true, $filename, $delimiter, $page, $limit);
+        return $data;
+    }
+
+    protected function microtime_float()
+    {
+        list($usec, $sec) = explode(" ", microtime());
+        return ((float)$usec + (float)$sec);
     }
 }
