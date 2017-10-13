@@ -42,13 +42,13 @@ trait APICommand
     }
 
 
-    protected function getDataCSVFile(InputInterface $input, OutputInterface $ouput, $filename, $serviceCSV)
+    protected function getDataCSVFile(InputInterface $input, OutputInterface $ouput, $filename, $serviceCSV, $delimiter = ';')
     {
+        $bypack = $input->hasArgument('bypack') ? $input->getArgument('bypack') : false;
         $page = $input->hasArgument('page') ? $input->getArgument('page') : 0;
         $limit = $input->hasArgument('package') ? $input->getArgument('package') : 100;
-        $delimiter = $input->hasArgument('delimiter') ? $input->getArgument('delimiter') : ';';
 
-        $data = $serviceCSV->convert(true, $filename, $delimiter, $page, $limit);
+        $data = $serviceCSV->convert($bypack, $filename, $delimiter, $page, $limit);
         return $data;
     }
 

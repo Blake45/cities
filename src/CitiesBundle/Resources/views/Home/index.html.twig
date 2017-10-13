@@ -29,5 +29,6 @@
 {% endblock javascripts %}
 {% block vars_js %}
     var base_url = '{{ app.request.getSchemeAndHttpHost() }}';
+    var domain_url = '{{ app.request.getBaseURL() }}';
     var json_villes = '{{ (villes|json_encode|raw) }}';
 {% endblock vars_js %}

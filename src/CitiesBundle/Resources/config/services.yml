@@ -14,6 +14,10 @@ services:
         class: CitiesBundle\Services\Ville
         arguments:
             - "@doctrine.orm.entity_manager"
+    cities.stats:
+        class: CitiesBundle\Services\Stats
+        arguments:
+            - "@doctrine.orm.entity_manager"
     cities_pagination:
         class: CitiesBundle\Services\Pagination
     cities.general.csv:

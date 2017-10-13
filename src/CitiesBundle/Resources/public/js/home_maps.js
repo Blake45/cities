@@ -61,12 +61,12 @@ Gmaps.prototype.geocodeCity = function (ville, map) {
 };
 
 Gmaps.prototype.buildCityMarker = function(ville, map) {
+    console.log(ville);
     var self = this;
-    if (ville.latitude == 0 && ville.longitude == 0) {
-        console.log(ville);
+    if (parseFloat(ville.latitude) == 0 && parseFloat(ville.longitude) == 0) {
         self.geocodeCity(ville, map);
     } else {
-        var LatLng = new google.maps.LatLng({lat: ville.latitude, lng: ville.longitude});
+        var LatLng = new google.maps.LatLng({lat: parseFloat(ville.latitude), lng: parseFloat(ville.longitude)});
         var marker = new google.maps.Marker({
             position: LatLng,
             title: "Population " + ville.numberPopulation,
@@ -74,7 +74,7 @@ Gmaps.prototype.buildCityMarker = function(ville, map) {
         });
         marker.setMap(map);
         var infowindow = new google.maps.InfoWindow({
-            content: 'Voir <a href="">' + ville.name + '</a>'
+            content: 'Voir <a href="'+domain_url+'/'+ville.regionSlug+'/'+ville.departementSlug+'/'+ville.slug+'">' + ville.name + '</a>'
         });
         marker.addListener('click', function () {
             infowindow.open(map, marker);
@@ -88,7 +88,7 @@ Gmaps.prototype.buildCityMarker = function(ville, map) {
  * @returns {*}
  */
 Gmaps.prototype.chooseIcon = function(ville) {
-    switch (ville.codeInsee) {
+    switch (ville.code_insee) {
         case "75056":
             return this.icones.paris;
         break;

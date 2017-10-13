@@ -34,6 +34,7 @@ class GPSCommand extends ContainerAwareCommand
             ->setName('filldata:fillgpsdata')
             ->setDescription('Rempli pour chaque ville les coordonnées GPS')
             ->addArgument("file", InputArgument::REQUIRED, "Path du fichier csv à traiter")
+            ->addOption("bypack", null,InputOption::VALUE_REQUIRED | InputOption::VALUE_NONE, "Decoupage du csv")
             ->addArgument("package", InputArgument::REQUIRED, "Nombre de villes traitées")
             ->addArgument("page", InputArgument::REQUIRED, "Numéro de page")
             ->addOption("restart", null, InputOption::VALUE_NONE | InputOption::VALUE_OPTIONAL, "restart the command")

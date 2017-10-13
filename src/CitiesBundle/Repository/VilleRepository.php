@@ -60,13 +60,28 @@ class VilleRepository extends \Doctrine\ORM\EntityRepository
      */
     public function getVillesImportantes($population = 100000)
     {
-        $query = $this->_em->createQueryBuilder()
-                ->select('ville.name, ville.numberPopulation, ville.codeInsee, ville.latitude, ville.longitude')
-                ->from($this->_entityName, 'ville')
-                ->where('ville.numberPopulation >= :population')
-                /*->orderBy('ville.numberPopulation', 'DESC')*/
-                ->setParameter('population', $population);
-
-        return $query->getQuery()->getArrayResult();
+        $sql = "
+            SELECT
+                ville.name,
+                ville.number_population,
+                ville.code_insee,
+                ville.latitude,
+                ville.longitude,
+                ville.slug,
+                (SELECT slug FROM region WHERE id = ville.region_id) as regionSlug,
+                (SELECT slug FROM departement WHERE id = ville.departement_id) as departementSlug
+            FROM ville
+            WHERE ville.number_population >= $population
+        ";
+        $conn = $this->_em->getConnection();
+        $query = $conn->query($sql);
+        return $query->fetchAll();
+//        $query = $this->_em->createQueryBuilder()
+//                ->select('ville.name, ville.numberPopulation, ville.codeInsee, ville.latitude, ville.longitude, ville.slug')
+//                ->from($this->_entityName, 'ville')
+//                ->where('ville.numberPopulation >= :population')
+//                ->setParameter('population', $population);
+//
+//        return $query->getQuery()->getArrayResult();
     }
 }
