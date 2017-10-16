@@ -61,7 +61,6 @@ Gmaps.prototype.geocodeCity = function (ville, map) {
 };
 
 Gmaps.prototype.buildCityMarker = function(ville, map) {
-    console.log(ville);
     var self = this;
     if (parseFloat(ville.latitude) == 0 && parseFloat(ville.longitude) == 0) {
         self.geocodeCity(ville, map);

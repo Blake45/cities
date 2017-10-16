@@ -29,7 +29,8 @@ class Csv
                         }
                     /** recupération des données de la ligne, recupération entiere du fichier */
                     } else {
-                        $data[] = array_combine($header, $row);
+                        //$data[] = array_combine($header, $row);
+                        $data[] = $row;
                     }
                     $numero_ligne++;
                 }

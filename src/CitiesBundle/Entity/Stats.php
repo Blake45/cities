@@ -31,9 +31,40 @@ class Stats
     /**
      * @var
      *
-     * @ORM\Column(name="politique", type="string", length=2000, nullable=false)
+     * @ORM\Column(name="politique", type="string", length=2000, nullable=true)
      */
     private $arrayPolitics;
+
+
+    /**
+     * @var
+     * @ORM\Column(name="population", type="integer", nullable=true)
+     */
+    private $population;
+
+    /**
+     * @var
+     * @ORM\Column(name="taux_pauvrete", type="float", nullable=true)
+     */
+    private $tauxPauvrete;
+
+    /**
+     * @var
+     * @ORM\Column(name="revenu_moyen", type="float", nullable=true)
+     */
+    private $revenuMoyen;
+
+    /**
+     * @var
+     * @ORM\Column(name="densite", type="float", nullable=true)
+     */
+    private $densite;
+
+    /**
+     * @var
+     * @ORM\Column(name="economie", type="string", length=2000, nullable=true)
+     */
+    private $arrayEconomie;
 
     /**
      * @var string
@@ -154,5 +185,125 @@ class Stats
     public function getArrayPolitics()
     {
         return json_decode($this->arrayPolitics);
+    }
+
+    /**
+     * Set population
+     *
+     * @param integer $population
+     *
+     * @return Stats
+     */
+    public function setPopulation($population)
+    {
+        $this->population = $population;
+
+        return $this;
+    }
+
+    /**
+     * Get population
+     *
+     * @return integer
+     */
+    public function getPopulation()
+    {
+        return $this->population;
+    }
+
+    /**
+     * Set tauxPauvrete
+     *
+     * @param float $tauxPauvrete
+     *
+     * @return Stats
+     */
+    public function setTauxPauvrete($tauxPauvrete)
+    {
+        $this->tauxPauvrete = $tauxPauvrete;
+
+        return $this;
+    }
+
+    /**
+     * Get tauxPauvrete
+     *
+     * @return float
+     */
+    public function getTauxPauvrete()
+    {
+        return $this->tauxPauvrete;
+    }
+
+    /**
+     * Set revenuMoyen
+     *
+     * @param float $revenuMoyen
+     *
+     * @return Stats
+     */
+    public function setRevenuMoyen($revenuMoyen)
+    {
+        $this->revenuMoyen = $revenuMoyen;
+
+        return $this;
+    }
+
+    /**
+     * Get revenuMoyen
+     *
+     * @return float
+     */
+    public function getRevenuMoyen()
+    {
+        return $this->revenuMoyen;
+    }
+
+    /**
+     * Set densite
+     *
+     * @param float $densite
+     *
+     * @return Stats
+     */
+    public function setDensite($densite)
+    {
+        $this->densite = $densite;
+
+        return $this;
+    }
+
+    /**
+     * Get densite
+     *
+     * @return float
+     */
+    public function getDensite()
+    {
+        return $this->densite;
+    }
+
+    /**
+     * Set arrayEconomie
+     *
+     * @param string $arrayEconomie
+     *
+     * @return Stats
+     */
+    public function setArrayEconomie($arrayEconomie)
+    {
+        $this->arrayEconomie = $arrayEconomie;
+
+        return $this;
+    }
+
+    /**
+     * Get arrayEconomie
+     *
+     * @return string
+     */
+    public function getArrayEconomie()
+    {
+        return $this->arrayEconomie;
     }
 }

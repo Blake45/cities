@@ -2,6 +2,7 @@
 
 namespace CitiesBundle\Command;
 
+use CitiesBundle\Entity\Stats;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Input\InputArgument;
@@ -26,6 +27,7 @@ class ImportInseeDataCommand extends ContainerAwareCommand
             ->addArgument('bypack', InputArgument::OPTIONAL, 'partition des données csv')
             ->addArgument('package', InputArgument::OPTIONAL, 'nombre de elements traités')
             ->addArgument('page', InputArgument::OPTIONAL, 'numero de page')
+            ->addOption('delimiter', null, InputOption::VALUE_OPTIONAL, 'delimiter csv')
         ;
     }
 
@@ -37,7 +39,7 @@ class ImportInseeDataCommand extends ContainerAwareCommand
 
         $container = $this->getContainer();
 
-        $data = $this->getDataCSVFile($input, $output, $input->getArgument('file'), $container->get('cities.general.csv'), ',');
+        $data = $this->getDataCSVFile($input, $output, $input->getArgument('file'), $container->get('cities.general.csv'), $input->getOption('delimiter'));
         $stats_service = $container->get('cities.stats');
 
         switch ($input->getArgument('typedata')) {
@@ -46,6 +48,9 @@ class ImportInseeDataCommand extends ContainerAwareCommand
             break;
             case 'politique':
                 $this->integratePolitique($io, $data, $stats_service, $input->getOption('entity'));
+            break;
+            case 'statistiques':
+                $this->integrateStatistiques($io, $data, $container);
             break;
             default:
                 throw new Exception("Mais cela n'a aucun sens, voyons! ".$input->getArgument('typedata').", nimp!! ");
@@ -79,6 +84,12 @@ class ImportInseeDataCommand extends ContainerAwareCommand
             $io->comment("Intégration des données de type politique");
             $stats_service->addStatsPolitique($typeentity, $array);
         }
+    }
+
+    private function integrateStatistiques($io, $data, $container)
+    {
+        $io->comment("Intégration des données de la region");
+        $container->get('cities.stats')->addDataStatsRegion($data);
     }
 
 }

@@ -1,0 +1,75 @@
+{% extends "CitiesBundle::layout.html.twig" %}
+
+{% block stylesheets_custom %}
+    {% stylesheets
+    'bundles/cities/css/gmaps.css'
+    filter='cssrewrite'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block main_content %}
+    <div class="col-sm-12">
+        <h1>{{ region.name }}</h1>
+    </div>
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="card-title">Taux de chomage</h4>
+                        <p class="card-text">{{ stats.tauxChomage }} %</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="card-title">Démographie</h4>
+                        <p class="card-text">{{ stats.population }} habitants</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="card-title">Taux de pauvreté</h4>
+                        <p class="card-text">{{ stats.tauxPauvrete }}</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="card-title">Revenu moyen</h4>
+                        <p class="card-text">{{ stats.revenuMoyen }} euros</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="card-title">Densité</h4>
+                        <p class="card-text">{{ stats.densite }} habitants/km²</p>
+                    </div>
+                </div>
+                <!-- todo carte gmaps avec les contours de la region -->
+                <div class="col-sm-5">
+                    <div id="region-maps" class="region-maps"></div>
+                </div>
+                <!-- todo graphique economie bas gauche -->
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ API_KEY }}">
+    </script>
+    {% javascripts
+    '@CitiesBundle/Resources/public/js/zones_geo.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock javascripts %}
+{% block vars_js %}
+    var base_url = '{{ app.request.getSchemeAndHttpHost() }}';
+    var domain_url = '{{ app.request.getBaseURL() }}';
+    var region = '{{ zone|json_encode|raw }}';
+{% endblock vars_js %}

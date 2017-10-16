@@ -35,6 +35,37 @@ class Stats
      */
     private $arrayPolitics;
 
+
+    /**
+     * @var
+     * @ORM\Column(name="population", type="integer", nullable=true)
+     */
+    private $population;
+
+    /**
+     * @var
+     * @ORM\Column(name="taux_pauvrete", type="float", nullable=true)
+     */
+    private $tauxPauvrete;
+
+    /**
+     * @var
+     * @ORM\Column(name="revenu_moyen", type="float", nullable=true)
+     */
+    private $revenuMoyen;
+
+    /**
+     * @var
+     * @ORM\Column(name="densite", type="float", nullable=true)
+     */
+    private $densite;
+
+    /**
+     * @var
+     * @ORM\Column(name="economie", type="string", length=2000, nullable=true)
+     */
+    private $arrayEconomie;
+
     /**
      * @var string
      *
@@ -131,5 +162,28 @@ class Stats
     {
         return $this->entityId;
     }
-}
 
+    /**
+     * Set arrayPolitics
+     *
+     * @param string $arrayPolitics
+     *
+     * @return Stats
+     */
+    public function setArrayPolitics($arrayPolitics)
+    {
+        $this->arrayPolitics = $arrayPolitics;
+
+        return $this;
+    }
+
+    /**
+     * Get arrayPolitics
+     *
+     * @return string
+     */
+    public function getArrayPolitics()
+    {
+        return json_decode($this->arrayPolitics);
+    }
+}
