@@ -58,6 +58,13 @@
 {% endblock %}
 
 
+{% block vars_js %}
+    var base_url = '{{ app.request.getSchemeAndHttpHost() }}';
+    var domain_url = '{{ app.request.getBaseURL() }}';
+    var json_economie_zone = '{{ dataSet|json_encode|raw }}';
+    var region = '{{ zone|json_encode|raw }}';
+{% endblock vars_js %}
+
 {% block javascripts %}
     <script src="https://maps.googleapis.com/maps/api/js?key={{ API_KEY }}">
     </script>
@@ -69,9 +76,3 @@
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock javascripts %}
-{% block vars_js %}
-    var base_url = '{{ app.request.getSchemeAndHttpHost() }}';
-    var domain_url = '{{ app.request.getBaseURL() }}';
-    var region = '{{ zone|json_encode|raw }}';
-    var json_economie_zone = '{{ dataSet|json_encode|raw }}'
-{% endblock vars_js %}

@@ -100,13 +100,19 @@ class Stats
         $statsRepo = $this->em->getRepository('CitiesBundle:Stats');
         $regionRepo = $this->em->getRepository('CitiesBundle:Region');
 
-        $stats = new \CitiesBundle\Entity\Stats();
+        $stats = null;
 
         foreach ($data as $key => $array) {
             switch ($array[0]) {
                 case "Entity_Region":
                     $region = $regionRepo->findOneBy(array('code' => $array[1]));
                     $stats = $statsRepo->findOneBy(array('entityId' => $region->getId()));
+
+                    if (is_null($stats)) {
+                        $stats = new \CitiesBundle\Entity\Stats();
+                        $stats->setType('region');
+                        $stats->setEntityId($region->getId());
+                    }
                     break;
                 case "Population en 2014":
                     $stats->setPopulation($array[1]);
@@ -117,6 +123,9 @@ class Stats
                 case "Médiane du revenu disponible par unité de consommation en 2014, en euros";
                     $stats->setRevenuMoyen($array[1]);
                     break;
+                case "Taux de chômage des 15 à 64 ans en 2014":
+                    $stats->setTauxChomage($array[1]);
+                break;
                 case "Densité de la population (nombre d'habitants au km²) en 2014":
                     $stats->setDensite($array[1]);
                 break;
@@ -131,7 +140,7 @@ class Stats
                     $economie['commerce_transports'] = $array[1];
                 case "Part de l'administration publique, enseignement, santé et action sociale, en %":
                     $economie['services'] = $array[1];
-                    break;
+                break;
             }
         }
         $stats->setArrayEconomie(json_encode($economie));

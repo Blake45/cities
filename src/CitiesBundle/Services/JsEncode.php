@@ -5,6 +5,7 @@ namespace CitiesBundle\Services;
 
 use CitiesBundle\Entity\Region;
 use CitiesBundle\Entity\Stats;
+use Colors\RandomColor;
 
 class JsEncode
 {
@@ -31,7 +32,7 @@ class JsEncode
             'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U',
             'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a', 'ç'=>'c',
             'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o',
-            'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y' );
+            'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', "'"=>" " );
         return strtr( $str, $unwanted_array );
     }
 
@@ -42,24 +43,17 @@ class JsEncode
 
         $data_set = array();
         $values = array();
-        $colors = array();
+        $colors = RandomColor::many(10, array('hue' => 'yellow'));
+        $backgroundColors = array();
 
         foreach ($datas as $label => $data) {
            $data_set['labels'][] = $label;
            $values[] = floatval($data);
-           $colors[] = $this->random_color();
+           $backgroundColors[] = $colors[rand(1, 9)];
         }
-        $data_set['datasets'][] = array('data' => $values, 'backgroundColor' => $colors);
+        $data_set['datasets'][] = array('data' => $values, 'backgroundColor' => $backgroundColors);
 
         return $data_set;
-    }
-
-    protected function random_color_part() {
-        return str_pad( dechex( mt_rand( 0, 255 ) ), 2, '0', STR_PAD_LEFT);
-    }
-
-    protected function random_color() {
-        return $this->random_color_part() . $this->random_color_part() . $this->random_color_part();
     }
 
 }
