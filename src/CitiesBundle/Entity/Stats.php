@@ -304,6 +304,6 @@ class Stats
      */
     public function getArrayEconomie()
     {
-        return $this->arrayEconomie;
+        return json_decode($this->arrayEconomie);
     }
 }

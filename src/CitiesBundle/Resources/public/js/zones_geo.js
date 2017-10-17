@@ -21,19 +21,23 @@ Zone.prototype.initMap = function () {
             center: results[0].geometry.location,
             zoom: 7
         });
-        self.addBounds(self.map);
+        self.addBounds(self.map, self.zone.coordinates);
     });
 };
 
-Zone.prototype.addBounds = function (map) {
-    console.log(base_url+'/cities/web/bundles/cities/kml/cta.kml');
-    var ctaLayer = new google.maps.KmlLayer({
-        url: base_url+'/cities/web/bundles/cities/kml/cta.kml',
-        map: map
+Zone.prototype.addBounds = function (map, coords) {
+
+    // Construct the polygon.
+    var zoneRegion = new google.maps.Polygon({
+        paths: coords,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35
     });
+    zoneRegion.setMap(map);
 };
-
-
 
 $(document).ready(function(){
     var zone = JSON.parse(region);

@@ -22,4 +22,10 @@ services:
         class: CitiesBundle\Services\Pagination
     cities.general.csv:
         class: CitiesBundle\Services\Csv
+    cities.general.xml:
+        class: CitiesBundle\Services\XmlParser
+        arguments:
+            - "@doctrine.orm.entity_manager"
+    cities.general.jsencode:
+        class: CitiesBundle\Services\JsEncode
 

@@ -16,43 +16,42 @@
     <div class="col-sm-12">
         <div class="panel panel-default">
             <div class="panel-body">
+                <div class="col-sm-7">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Démographie</h3>
+                        </div>
+                        <div class="panel-body">{{ stats.population }} habitants</div>
+                    </div>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Densité</h3>
+                        </div>
+                        <div class="panel-body">{{ stats.densite }} habitants/km²</div>
+                    </div>
+                </div>
 
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title">Taux de chomage</h4>
-                        <p class="card-text">{{ stats.tauxChomage }} %</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title">Démographie</h4>
-                        <p class="card-text">{{ stats.population }} habitants</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title">Taux de pauvreté</h4>
-                        <p class="card-text">{{ stats.tauxPauvrete }}</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title">Revenu moyen</h4>
-                        <p class="card-text">{{ stats.revenuMoyen }} euros</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title">Densité</h4>
-                        <p class="card-text">{{ stats.densite }} habitants/km²</p>
-                    </div>
-                </div>
-                <!-- todo carte gmaps avec les contours de la region -->
                 <div class="col-sm-5">
                     <div id="region-maps" class="region-maps"></div>
                 </div>
                 <!-- todo graphique economie bas gauche -->
-
+                <div class="col-sm-7">
+                    <canvas id="economie" class="region-economie"></canvas>
+                </div>
+                <div class="col-sm-5">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Revenu moyen</h3>
+                        </div>
+                        <div class="panel-body">{{ stats.revenuMoyen }} euros</div>
+                    </div>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Taux de pauvreté</h3>
+                        </div>
+                        <div class="panel-body">{{ stats.tauxPauvrete }}</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -63,7 +62,9 @@
     <script src="https://maps.googleapis.com/maps/api/js?key={{ API_KEY }}">
     </script>
     {% javascripts
+    '@CitiesBundle/Resources/public/js/Chart.min.js'
     '@CitiesBundle/Resources/public/js/zones_geo.js'
+    '@CitiesBundle/Resources/public/js/zones_graph.js'
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
@@ -72,4 +73,5 @@
     var base_url = '{{ app.request.getSchemeAndHttpHost() }}';
     var domain_url = '{{ app.request.getBaseURL() }}';
     var region = '{{ zone|json_encode|raw }}';
+    var json_economie_zone = '{{ dataSet|json_encode|raw }}'
 {% endblock vars_js %}

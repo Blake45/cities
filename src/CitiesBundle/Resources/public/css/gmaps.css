@@ -3,7 +3,7 @@ div.google-maps {
     min-height: 600px;
     margin: 20px 0 20px 0;
 }
-div.region-maps {
+div.region-maps, div.region-economie {
     width: 100%;
     min-height: 300px;
     margin: 20px 0 20px 0;

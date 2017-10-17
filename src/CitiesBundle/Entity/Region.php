@@ -53,6 +53,13 @@ class Region
 
 
     /**
+     * @var
+     * @ORM\Column(name="coordinates", type="text", nullable=true)
+     */
+    private $coordinates;
+
+
+    /**
      * Get id
      *
      * @return int
@@ -132,5 +139,70 @@ class Region
     public function getSlug()
     {
         return $this->slug;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->villes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set coordinates
+     *
+     * @param string $coordinates
+     *
+     * @return Region
+     */
+    public function setCoordinates($coordinates)
+    {
+        $this->coordinates = $coordinates;
+
+        return $this;
+    }
+
+    /**
+     * Get coordinates
+     *
+     * @return string
+     */
+    public function getCoordinates()
+    {
+        return $this->coordinates;
+    }
+
+    /**
+     * Add ville
+     *
+     * @param \CitiesBundle\Entity\Ville $ville
+     *
+     * @return Region
+     */
+    public function addVille(\CitiesBundle\Entity\Ville $ville)
+    {
+        $this->villes[] = $ville;
+
+        return $this;
+    }
+
+    /**
+     * Remove ville
+     *
+     * @param \CitiesBundle\Entity\Ville $ville
+     */
+    public function removeVille(\CitiesBundle\Entity\Ville $ville)
+    {
+        $this->villes->removeElement($ville);
+    }
+
+    /**
+     * Get villes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVilles()
+    {
+        return $this->villes;
     }
 }
