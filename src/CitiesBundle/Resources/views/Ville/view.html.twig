@@ -6,77 +6,10 @@
     </div>
     <!-- todo Appel des iframes -->
     <div class="col-sm-12">
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
-                    <h4 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Securité
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="panel-body">
-                        <div class="datafrance">
-                            <iframe frameborder="0" src="https://datafrance.info:443/{{ datafrancecall }}/environnement-securite/atteintes-aux-biens?view=pie&iframe=true"></iframe>
-                        </div>
-                        <div class="datafrance">
-                            <iframe frameborder="0" src="https://datafrance.info:443/{{ datafrancecall }}/environnement-securite/atteintes-volontaires-a-lintegrite-physique?view=line&iframe=true"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingTwo">
-                    <h4 class="panel-title">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Loisir et Culture
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                    <div class="panel-body">
-                        <div class="datafrance">
-                            <iframe frameborder="0" src="https://datafrance.info:443/{{ datafrancecall }}/sport-loisirs/installations-sportives?iframe=true"></iframe>
-                        </div>
-                        <div class="datafrance">
-                            <iframe frameborder="0" src="https://datafrance.info:443/{{ datafrancecall }}/sport-loisirs/lieux-culturels?iframe=true"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingThree">
-                    <h4 class="panel-title">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Emploi
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                    <div class="panel-body">
-                        <div class="datafrance">
-                            <iframe frameborder="0" src="https://datafrance.info/{{ datafrancecall }}/economie-emploi/chomage?view=line&type=number&iframe=true"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingThree">
-                    <h4 class="panel-title">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Population
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                    <div class="panel-body">
-                        <div class="datafrance">
-                            <iframe frameborder="0" src="https://datafrance.info/{{ datafrancecall }}/population/evolution-population?view=line&iframe=true"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% set regionSlug = ville.region ? ville.region.slug : '' %}
+        {% set departementSlug = ville.departement ? ville.departement.slug : '' %}
+        <a type="button" class="btn btn-default btn-lg" href="{{ url("cities_post_avis",{departementSlug: departementSlug, villeSlug: ville.slug, idville: ville.id}) }}">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Deposer un avis sur {{ ville.name }}
+        </a>
     </div>
 {% endblock %}

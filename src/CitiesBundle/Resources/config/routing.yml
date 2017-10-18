@@ -51,3 +51,19 @@ cities_departement:
         region_slug: "[a-z-]*[a-z]*$"
         departement_slug: "[a-z-]*[a-z]*$"
 
+
+cities_post_avis:
+    path:     /deposer-avis/{departementSlug}/{villeSlug}/{idville}
+    defaults: { _controller: CitiesBundle:Avis:post }
+    requirements:
+        departementSlug: "[a-z-]*[a-z]*$"
+        villeSlug: "[a-z-]*[a-z]*$"
+        idville: \d+
+
+liste:
+    path:     /liste-avis/{regionSlug}/{departementSlug}/{villeSlug}
+    defaults: { _controller: CitiesBundle:Avis:liste }
+    requirements:
+        regionSlug: "[a-z-]*[a-z]*$"
+        departementSlug: "[a-z-]*[a-z]*$"
+        villeSlug: "[a-z-]*[a-z]*$"

@@ -1,0 +1,107 @@
+{% extends "CitiesBundle::layout.html.twig" %}
+
+{% block stylesheets_custom %}
+    {% stylesheets
+    'bundles/cities/css/avis.css'
+    filter='cssrewrite'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block main_content %}
+    <div class="col-sm-12">
+        <h1>Formulaire d'avis sur la ville {{ ville.name }}</h1>
+    </div>
+    <!-- todo Appel des iframes -->
+    <form class="form-horizontal">
+        <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label col-sm-7">{{ form_label(form.securite) }}</label>
+                    <div class="col-sm-5">
+                        {{ form_widget(form.securite) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-7">{{ form_label(form.loisir) }}</label>
+                    <div class="col-sm-5">
+                        {{ form_widget(form.loisir) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-7">{{ form_label(form.culture) }}</label>
+                    <div class="col-sm-5">
+                        {{ form_widget(form.culture) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-7">{{ form_label(form.emploi) }}</label>
+                    <div class="col-sm-5">
+                        {{ form_widget(form.emploi) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-7">{{ form_label(form.environnement) }}</label>
+                    <div class="col-sm-5">
+                        {{ form_widget(form.environnement) }}
+                    </div>
+                </div>
+        </div>
+        <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label col-sm-7">{{ form_label(form.sante) }}</label>
+                    <div class="col-sm-5">
+                        {{ form_widget(form.sante) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-7">{{ form_label(form.commerce) }}</label>
+                    <div class="col-sm-5">
+                        {{ form_widget(form.commerce) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-7">{{ form_label(form.transport) }}</label>
+                    <div class="col-sm-5">
+                        {{ form_widget(form.transport) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-7">{{ form_label(form.enseignement) }}</label>
+                    <div class="col-sm-5">
+                        {{ form_widget(form.enseignement) }}
+                    </div>
+                </div>
+        </div>
+        <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="control-label col-sm-4">{{ form_label(form.commentPositif) }}</label>
+                    <div class="col-sm-8">
+                        {{ form_widget(form.commentPositif) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">{{ form_label(form.commentNegatif) }}</label>
+                    <div class="col-sm-8">
+                        {{ form_widget(form.commentNegatif) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">{{ form_label(form.commentGeneral) }}</label>
+                    <div class="col-sm-8">
+                        {{ form_widget(form.commentGeneral) }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block javascripts %}
+    {% javascripts
+    '@CitiesBundle/Resources/public/js/jquery.barrating.js'
+    '@CitiesBundle/Resources/public/js/avis.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock javascripts %}
