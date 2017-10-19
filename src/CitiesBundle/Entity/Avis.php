@@ -435,4 +435,14 @@ class Avis
     {
         return $this->qualiteVie;
     }
+
+    /**
+     * Generique function
+     * @param $property
+     * @return mixed
+     */
+    public function __get($property)
+    {
+        return $this->$property;
+    }
 }

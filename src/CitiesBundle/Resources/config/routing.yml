@@ -11,6 +11,9 @@ phpinfo:
 route_404:
     path:    /404.html
     defaults: { _controller: CitiesBundle:Debug:route404 }
+route_503:
+    path:    /503.html
+    defaults: { _controller: CitiesBundle:Debug:route503 }
 
 # Parti villes
 cities_villes:
@@ -59,6 +62,7 @@ cities_post_avis:
         departementSlug: "[a-z-]*[a-z]*$"
         villeSlug: "[a-z-]*[a-z]*$"
         idville: \d+
+        _method: GET|POST
 
 liste:
     path:     /liste-avis/{regionSlug}/{departementSlug}/{villeSlug}

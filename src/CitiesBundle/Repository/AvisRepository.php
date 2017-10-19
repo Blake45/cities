@@ -10,4 +10,12 @@ namespace CitiesBundle\Repository;
  */
 class AvisRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function deleteAllAvis()
+    {
+        $sql = "TRUNCATE avis";
+        $conn = $this->getEntityManager()->getConnection();
+
+        $query = $conn->query($sql);
+        $query->execute();
+    }
 }

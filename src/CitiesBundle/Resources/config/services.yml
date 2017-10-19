@@ -28,4 +28,9 @@ services:
             - "@doctrine.orm.entity_manager"
     cities.general.jsencode:
         class: CitiesBundle\Services\JsEncode
+    cities.handle.avis:
+        class: CitiesBundle\Services\ServiceHandleAvis
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@service_container"
 

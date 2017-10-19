@@ -35,6 +35,13 @@
                 {% block header %}
                     {% include "CitiesBundle:Partial:header.html.twig" %}
                 {% endblock header %}
+                <div class="col-sm-offset-2 col-sm-8 col-sm-offset-2">
+                    {% for label, message in app.session.flashbag.all %}
+                        <div class="alert alert-{{ label }}">
+                            {{ dump(message) }}
+                        </div>
+                    {% endfor %}
+                </div>
                 {% block main_content %}{% endblock main_content %}
             </div>
         </div>

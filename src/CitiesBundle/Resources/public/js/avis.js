@@ -12,7 +12,7 @@ $(document).ready(function(){
        .barrating({
       theme: 'bars-1to10',
       onSelect: function(value, text, event) {
-          $(this.$elem).prop('selected', true);
+          $(this.$elem).find('option[value="'+value+'"]').attr('selected', 'selected');
       }
    });
 });
