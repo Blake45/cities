@@ -1,3 +1,4 @@
 cities:
     resource: "@CitiesBundle/Resources/config/routing.yml"
     prefix:   /
+
