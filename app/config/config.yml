@@ -86,3 +86,12 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
+#hwi_oauth:
+#    firewall_names: [secured_area]
+#    resource_owners:
+#        any_name:
+#            type:  google
+#            client_id:  991741687637-fskpdsi8sqal0ifg1nqenmpb9lte2p49.apps.googleusercontent.com
+#            client_secret:  5gx9GX_JqCOpCB-Lrhih0fCl
+#            scope:  "thibaut.leclere@gmail.com"
+

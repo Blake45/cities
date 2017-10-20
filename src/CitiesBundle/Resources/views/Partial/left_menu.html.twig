@@ -19,4 +19,22 @@
             Liste des villes
         </a>
     </li>
+    <li>
+        <a href="{{ url("register") }}">
+            Inscription
+        </a>
+    </li>
+    {% if app.user %}
+        <li>
+            <a href="{{ url("logout") }}">
+                Deconnexion
+            </a>
+        </li>
+    {% else %}
+        <li>
+            <a href="{{ url("login") }}">
+                Connexion
+            </a>
+        </li>
+    {% endif %}
 </ul>

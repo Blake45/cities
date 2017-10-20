@@ -15,6 +15,16 @@ route_503:
     path:    /503.html
     defaults: { _controller: CitiesBundle:Debug:route503 }
 
+login:
+    path:   /connexion
+    defaults:  { _controller: CitiesBundle:User:login }
+logout:
+    path:   /deconnexion
+    defaults:  { _controller: CitiesBundle:User:logout }
+register:
+    path:   /inscription
+    defaults:  { _controller: CitiesBundle:User:register }
+
 # Parti villes
 cities_villes:
     path:    /liste-communes/{page}/{limit}
